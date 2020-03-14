@@ -1,0 +1,58 @@
+
+/* font-family: 'Montserrat Alternates', sans-serif;
+font-family: 'Berkshire Swash', cursive; */
+
+
+
+h1 {
+    font-family: "Berkshire Swash", cursive;
+    font-size: 6rem;
+    color: gold;
+}
+
+p, label, table {
+    font-family: "Montserrat Alternates", sans-serif; 
+}
+
+
+.btn {
+    margin: 20px auto;
+    background-color: sienna;
+    border-color: sienna;
+    font-family: "Montserrat Alternates", sans-serif; 
+}
+
+
+.btn:hover {
+    background-color: gold;
+    border-color: gold;
+    color: black;
+}
+
+.jumbotron-fluid {
+    background-image: url("../images/train-banner.png");
+    background-size: cover;
+}
+
+.header {
+    text-align: center;
+    padding: 5%;
+}
+
+.card-header {
+    background-color: sienna;
+    color: white;
+    font-family: "Montserrat Alternates", sans-serif;
+}
+
+#current-schedule {
+    margin-top: 30px;
+}
+
+#add-train {
+    margin-top: 30px;
+}
+
+.form-group{
+    margin: 15px;
+}
