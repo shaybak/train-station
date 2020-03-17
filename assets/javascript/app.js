@@ -21,7 +21,8 @@ var database = firebase.database();
 var trainName = "";
 var trainDestination = "";
 var trainFrequency = "";
-var trainFirstTime = "";
+var trainTime = "";
+var trainFirstTimeArray = [];
 
 // Capture "Submit" button click
 $("#add-train-submit").on("click", function () {
@@ -30,7 +31,9 @@ $("#add-train-submit").on("click", function () {
   trainName = $("#train-name").val().trim();
   trainDestination = $("#destination").val().trim();
   trainFrequency = $("#frequency").val().trim();
-  trainFirstTime = $("#first-train-time").val().trim();
+  trainTime = $("#first-train").val().trim();
+
+ 
 
   // Push to database
   database.ref().push({
@@ -38,34 +41,46 @@ $("#add-train-submit").on("click", function () {
     name: trainName,
     destination: trainDestination,
     frequency: trainFrequency,
-    firstTime: trainFirstTime
+    time: trainTime
 
   });
 });
 
-// Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+// Firebase watcher + initial loader 
 database.ref().on("child_added", function (childSnapshot) {
 
-  // Log everything that's coming out of snapshot
-  console.log(childSnapshot.val().name);
-  console.log(childSnapshot.val().destination);
-  console.log(childSnapshot.val().frequency);
-  console.log(childSnapshot.val().firstTime);
+  console.log(trainTime + " -----TIME")
+  // console.log(childSnapshot.val().name);
+  // console.log(childSnapshot.val().destination);
+  // console.log(childSnapshot.val().frequency);
+  console.log(childSnapshot.val().time);
 
-  // full list of items to the well
+var trainFirstTimeConverted = moment.unix(trainTime).format("HH:mm");
+// console.log(trainFirstTimeConverted);
+// console.log("------- ^trainFirstTimeConverted------------")
+
+    // Calculate the minutes until arrival using hardcore math
+    // To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time and find the modulus between the difference and the frequency  
+    var tRemainder = moment().diff(moment.unix(trainFirstTimeConverted)) % trainFrequency;
+    var tMinutes = trainFrequency - tRemainder;
+
+    // To calculate the arrival time, add the tMinutes to the currrent time
+    var nextArrival = moment().add(tMinutes).format("HH:mm");
+    // console.log(nextArrival);
+    // console.log("------- ^nextArrival------------")
+
+
+
+
+  // Here we append the new train's information to the list
   $("#train-list").append("<tr><td class='name'>" +
     childSnapshot.val().name +
     " </td><td class='destination'> " + childSnapshot.val().destination +
     " </td><td class='frequency'> " + childSnapshot.val().frequency +
-    // " </td><td class='member-comment'> " + childSnapshot.val().firstTime +
+    " </td><td class='next-arrival'> " + nextArrival +
     " </td></tr>");
 
   // Handle the errors
 }, function (errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
-
-var trainFirstTimeConverted = moment.unix(trainFirstTime).format("HH:mm");
-console.log(trainFirstTimeConverted);
-
-  // var nextArrival = moment().diff(moment(trainFirstTimeConverted));
