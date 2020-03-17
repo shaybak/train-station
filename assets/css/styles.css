@@ -15,16 +15,15 @@ p, label, table {
 }
 
 body {
-    background-image: url("../images/train-bkg.png");
-    background-size: contain;
+    background-color: lightgoldenrodyellow;
 }
 
 
 
 .btn {
     margin: 20px auto;
-    background-color: sienna;
-    border-color: sienna;
+    background-color: darkgreen;
+    border-color: darkgreen;
     font-family: "Montserrat Alternates", sans-serif; 
 }
 
@@ -46,7 +45,7 @@ body {
 }
 
 .card-header {
-    background-color: sienna;
+    background-color: darkgreen;
     color: white;
     font-family: "Montserrat Alternates", sans-serif;
 }
@@ -65,4 +64,5 @@ body {
 
 .input-bar {
     margin-bottom: 15px;
+    background-color: palegoldenrod;
 }

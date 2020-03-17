@@ -49,15 +49,16 @@ $("#add-train-submit").on("click", function () {
 // Firebase watcher + initial loader 
 database.ref().on("child_added", function (childSnapshot) {
 
-  console.log(trainTime + " -----TIME")
   // console.log(childSnapshot.val().name);
   // console.log(childSnapshot.val().destination);
   // console.log(childSnapshot.val().frequency);
-  console.log(childSnapshot.val().time);
 
-var trainFirstTimeConverted = moment.unix(trainTime).format("HH:mm");
-// console.log(trainFirstTimeConverted);
-// console.log("------- ^trainFirstTimeConverted------------")
+  time = childSnapshot.val().time
+  console.log(time + "   -----time")
+
+var trainFirstTimeConverted = moment.unix(time).format("H:mm");
+console.log(trainFirstTimeConverted);
+console.log("------- ^trainFirstTimeConverted------------")
 
     // Calculate the minutes until arrival using hardcore math
     // To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time and find the modulus between the difference and the frequency  
@@ -66,8 +67,8 @@ var trainFirstTimeConverted = moment.unix(trainTime).format("HH:mm");
 
     // To calculate the arrival time, add the tMinutes to the currrent time
     var nextArrival = moment().add(tMinutes).format("HH:mm");
-    // console.log(nextArrival);
-    // console.log("------- ^nextArrival------------")
+    console.log(nextArrival);
+    console.log("------- ^nextArrival------------")
 
 
 
